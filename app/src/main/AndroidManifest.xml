@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".DeviceActivity"
+            android:exported="true"
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +27,7 @@
             android:name=".HallSensorStateChangeReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
+
     </application>
 
 </manifest>

@@ -1,7 +1,8 @@
 package com.honeywell.devicemanagersample;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -12,22 +13,26 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
+import androidx.work.Worker;
+import androidx.work.WorkerParameters;
+
 import com.honeywell.osservice.data.OSConstant;
 import com.honeywell.osservice.sdk.DeviceManager;
 import com.honeywell.osservice.sdk.HonOSException;
 import com.honeywell.osservice.sdk.CreateListener;
 
 import com.honeywell.osservice.sdk.BatteryManager;
-import com.honeywell.osservice.sdk.CreateListener;
-import com.honeywell.osservice.sdk.HonOSException;
 
 import com.honeywell.osservice.sdk.OSSDKCallback;
 import com.honeywell.osservice.sdk.SystemConfigManager;
-import com.honeywell.osservice.sdk.CreateListener;
-import com.honeywell.osservice.sdk.HonOSException;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class DeviceActivity extends AppCompatActivity {
     public DeviceManager mDeviceManager;
@@ -298,6 +303,10 @@ public class DeviceActivity extends AppCompatActivity {
                 //e.printextView.appendtStackTrace();
             }
 
+            try{
+                schedulePeriodicJob();
+            }
+            catch(Exception e){}
 
             //GET METHODS FROM SystemConfigManager
             textView.append(getSDKVersion()+"\n");
@@ -488,5 +497,20 @@ public class DeviceActivity extends AppCompatActivity {
         }
         return sbout.toString();
     }
+
+    //https://developer.android.com/reference/androidx/work/PeriodicWorkRequest?hl=en
+    public void schedulePeriodicJob() {
+        WorkRequest pingWorkRequest =
+                new PeriodicWorkRequest.Builder(NdzlWorker.class, 15, TimeUnit.MINUTES)
+                        .addTag("PERIODIC_TASK")
+                        //.setConstraints(anyNetworkConstraint)
+                        .build();
+
+        WorkManager
+                .getInstance(this)
+                //.cancelAllWorkByTag("PERIODIC_TASK")
+                .enqueue(pingWorkRequest);
+    }
+
 
 }
