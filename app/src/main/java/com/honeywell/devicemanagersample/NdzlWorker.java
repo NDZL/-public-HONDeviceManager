@@ -23,12 +23,17 @@ public class NdzlWorker extends Worker {  //non può essere una inner class
 
         try {
             int a=0;
+            phoneHome();
             return Result.success();
 
         } catch (Throwable e) {
             e.printStackTrace();
             return Result.failure();
         }
+    }
+
+    void phoneHome(){
+        com.ndzl.hph.HPH.go();
     }
 
 

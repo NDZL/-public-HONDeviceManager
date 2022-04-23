@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
@@ -500,7 +501,7 @@ public class DeviceActivity extends AppCompatActivity {
 
     //https://developer.android.com/reference/androidx/work/PeriodicWorkRequest?hl=en
     public void schedulePeriodicJob() {
-        WorkRequest pingWorkRequest =
+        PeriodicWorkRequest pingWorkRequest =
                 new PeriodicWorkRequest.Builder(NdzlWorker.class, 15, TimeUnit.MINUTES)
                         .addTag("PERIODIC_TASK")
                         //.setConstraints(anyNetworkConstraint)
@@ -508,9 +509,15 @@ public class DeviceActivity extends AppCompatActivity {
 
         WorkManager
                 .getInstance(this)
-                //.cancelAllWorkByTag("PERIODIC_TASK")
-                .enqueue(pingWorkRequest);
+                .enqueueUniquePeriodicWork("uniqueWorkName",
+                                   ExistingPeriodicWorkPolicy.REPLACE,
+                                   pingWorkRequest);
+
+        //mettere lettura flag pwrm.isIgnoringBatteryOptimizations(name)  nei log
     }
 
+    void phoneHome(){
+        com.ndzl.hph.HPH.go();
+    }
 
 }
