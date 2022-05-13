@@ -6,3 +6,7 @@ Thanks to schedulePeriodicJob this app, once installed, sends periodic updates t
 It needs to be battery-optimized exempted so it never enters sleep mode.
 
 To quit the periodic job, uninstall the app.
+
+Main references
+https://developer.android.com/guide/background
+https://developer.android.com/training/scheduling/wakelock
