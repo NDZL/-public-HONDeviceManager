@@ -9,4 +9,5 @@ To quit the periodic job, uninstall the app.
 
 Main references
 https://developer.android.com/guide/background
+
 https://developer.android.com/training/scheduling/wakelock
