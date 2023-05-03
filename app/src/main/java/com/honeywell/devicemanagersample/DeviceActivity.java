@@ -3,6 +3,10 @@ package com.honeywell.devicemanagersample;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -73,6 +77,8 @@ public class DeviceActivity extends AppCompatActivity {
         switch1=(Switch) findViewById(R.id.switch1);
         switch2=(Switch) findViewById(R.id.switch2);
         switch3=(Switch) findViewById(R.id.switch3);
+
+        textView.append(getTargetSDK()+"\nAPI:"+getAndroidAPI()+"\n");
 
         DeviceManager.create(this, new CreateListener<DeviceManager>() {
             @Override
@@ -310,7 +316,7 @@ public class DeviceActivity extends AppCompatActivity {
             catch(Exception e){}
 
             //GET METHODS FROM SystemConfigManager
-            textView.append(getSDKVersion()+"\n");
+           // textView.append(getSDKVersion()+"\n");
             textView.append(getCounters()+"\n");
 
 
@@ -462,22 +468,24 @@ public class DeviceActivity extends AppCompatActivity {
     }
 
 
-    public String getSDKVersion(){
-        if(null != mSystemConfigManager){
-
-            String version = null;
-            try {
-                version = mSystemConfigManager.getOSExtensionSDKVersion();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (null != version) {
-                   return "SDK Version:"+version+"\n";
-                }
-                else
-                    return "N/A1";
+    String getTargetSDK(){
+        int version = 0;
+        String app_username="";
+        PackageManager pm = getPackageManager();
+        ApplicationInfo applicationInfo = null;
+        try {
+            applicationInfo = pm.getApplicationInfo(getPackageName() , 0);
+        } catch (PackageManager.NameNotFoundException e) {}
+        if (applicationInfo != null) {
+            version = applicationInfo.targetSdkVersion;
+            app_username = AndroidFileSysInfo.getNameForId( applicationInfo.uid );
         }
-        return "";
+        return  "APP_TARGET_API:"+version+" APP_USER:"+app_username;
+    }
+
+    String getAndroidAPI(){
+        String _sb_who =  Build.MANUFACTURER+","+ Build.MODEL+"\n"+ Build.DISPLAY+", API:"+ android.os.Build.VERSION.SDK_INT;
+        return  _sb_who;
     }
 
     public String getCounters(){
@@ -516,8 +524,6 @@ public class DeviceActivity extends AppCompatActivity {
         //mettere lettura flag pwrm.isIgnoringBatteryOptimizations(name)  nei log
     }
 
-    void phoneHome(){
-        com.ndzl.hph.HPH.go();
-    }
+
 
 }
