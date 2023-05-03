@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-runtime:2.4.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/325f3e349653dd0d061791106f2296d4/transformed/lifecycle-runtime-2.4.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/325f3e349653dd0d061791106f2296d4/transformed/lifecycle-runtime-2.4.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/325f3e349653dd0d061791106f2296d4/transformed/lifecycle-runtime-2.4.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../EMDK_SET_AUTOCLOCK/caches/transforms-3/325f3e349653dd0d061791106f2296d4/transformed/lifecycle-runtime-2.4.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../EMDK_SET_AUTOCLOCK/caches/transforms-3/325f3e349653dd0d061791106f2296d4/transformed/lifecycle-runtime-2.4.0/res" />
+      <root url="file://$PROJECT_DIR$/../EMDK_SET_AUTOCLOCK/caches/transforms-3/325f3e349653dd0d061791106f2296d4/transformed/lifecycle-runtime-2.4.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-runtime/2.4.0/ae7040cf314de81d20ac69f28f5ab6c9a2c0d1ab/lifecycle-runtime-2.4.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../EMDK_SET_AUTOCLOCK/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-runtime/2.4.0/ae7040cf314de81d20ac69f28f5ab6c9a2c0d1ab/lifecycle-runtime-2.4.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

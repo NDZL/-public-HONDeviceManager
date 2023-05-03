@@ -271,10 +271,11 @@ public class DeviceActivity extends AppCompatActivity {
             }
             try {
                 String sn = mDeviceManager.getSerialNumber();
-                textView.append("Serial Number = " + sn+"\n");
+                textView.append(getTargetSDK()+"\nAPI:"+getAndroidAPI()+"\n");
+                textView.append("Device Serial Number = " + sn+"\n\n");
             } catch (HonOSException e) {
                 Log.e("OSSDK_Demo", e.getErrorCode() + " " + e.getMessage());
-                textView.append("Serial Number = " + e.getMessage()+"\n");
+                textView.append("Device Serial Number = " + e.getMessage()+"\n");
                 e.printStackTrace();
             }
             try {
